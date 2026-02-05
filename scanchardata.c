@@ -1,27 +1,5 @@
 #include <stdio.h>
-
-struct player 
-{
-    char name[32];
-    short hp;
-    short endurance; 
-    short tired;
-    short hunger;
-    short thirst;
-    short is_bleeding;
-    short have_pain;
-    short is_sick;
-    short is_hurt;
-    short panic;
-    short stress;
-    short is_unhappy;
-    short overloaded;
-    short temperature;
-    short has_a_cold;
-    short is_drunk;
-    short dead;
-    short knoxxed;
-};
+#include "tihyd_entities.h"
 
 int loadgame(struct player *a) 
 {
@@ -29,12 +7,12 @@ int loadgame(struct player *a)
     if (f == NULL) {printf("Error opening file");return 1;}
     fscanf(f, "Name:%[^;];\n", a->name);
     short *stats[] = {
-        &a->hp, &a->endurance, &a->tired, &a->hunger, &a->thirst, &a->is_bleeding, &a->have_pain,
-        &a->is_sick, &a->is_hurt, &a->panic, &a->stress, &a->is_unhappy, &a->overloaded, 
-        &a->temperature, &a->has_a_cold, &a->is_drunk, &a->dead, &a->knoxxed
+        &a->body.hp, &a->body.endurance, &a->body.tired, &a->body.hunger, &a->body.thirst, &a->body.bleeding, &a->mind.pain,
+        &a->body.sick, &a->body.hurt, &a->mind.panic, &a->mind.stress, &a->mind.unhappy, &a->body.overloaded, 
+        &a->body.temperature, &a->body.hascold, &a->mind.drunk, &a->state.dead, &a->state.knoxxed
     };
 
-    char count = 18;
+    short count = sizeof(stats) / sizeof(stats[0]);
     short buffer;
 
     for (char i = 0; i<count; i++)
